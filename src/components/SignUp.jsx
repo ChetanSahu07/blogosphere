@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import authservice from '../appwrite/auth'
 import Button from './button'
 import Input from './Input'
-import Logo from './logo/logo'
+import Logo from './Logo/Logo'
 import { login } from '../store/authSlice'
 
 function SignUp() {
