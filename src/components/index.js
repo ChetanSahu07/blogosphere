@@ -8,7 +8,6 @@ import PostCard from "./PostCard";
 import Select from './Select'
 import SignUp from "./SignUp";
 import Protected from "./AuthLayout";
-import Container from "./container/Container";
 import PostForm from "./PostForm/PostForm";
 import Button from "./button.jsx";
 
