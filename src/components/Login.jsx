@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import Button from './button'
 
 
-import Logo from './logo/logo'
+import Logo from './Logo/Logo'
 // The main thing that we are using is useForm from react hook form 
 
 function Login() {
