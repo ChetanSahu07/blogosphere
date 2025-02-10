@@ -1,4 +1,4 @@
-import container from "./container/container";
+import Container from "./container/Container";
 import LogoutBtn from "./Header/LogoutBtn";
 import Logo from "./logo/logo";
 import Input from './Input'
