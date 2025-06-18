@@ -4,6 +4,10 @@ import { data } from 'react-router-dom'
 import { Container, PostCard } from '../components'
 import { useSelector } from 'react-redux'
 
+
+
+import { getAllBlogs } from '../backendConnect/blog.js'
+
 // Is user is not logged in then we will get zero posts from database 
 
 

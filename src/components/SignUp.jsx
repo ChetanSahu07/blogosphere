@@ -8,6 +8,11 @@ import Input from './Input'
 import Logo from './Logo/Logo'
 import { login } from '../store/authSlice'
 
+
+
+
+import { userCreateAccount, userGetCurrentUser } from '../backendConnect/auth.js'
+
 function SignUp() {
     const [error, SetError] = useState("")
     const { register, handleSubmit } = useForm()
@@ -17,9 +22,9 @@ function SignUp() {
     const signupAccount = async (data) => {
         SetError("")
         try {
-            const session = await authservice.createAccount(data)
+            const session = await userCreateAccount(data) ;
             if (session) {
-                const userData = await authservice.getCurrentUser()
+                const userData = await userGetCurrentUser() ;
                 if (userData) {
                     dispatch(login(userData))
                     navigate("/")

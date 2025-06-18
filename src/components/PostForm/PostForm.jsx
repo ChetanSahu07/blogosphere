@@ -6,15 +6,22 @@ import databaseService from '../../appwrite/dataservice'
 import {Input , RTE , Select, Button} from '../index'
 
 
+
+
+import { updateBlog, createBlog } from '../../backendConnect/blog'
+
+
 function PostForm({post}) {
 
+    // console.log(post);
+    
     // Control will be passed to RTE , watch is used to have continues tracking on any input 
     const { register , handleSubmit , control , watch , setValue , getValues } = useForm({
         defaultValues:{
             title: post?.title || '' ,
             content : post?.content || '' ,
-            slug: post?.slug || '' ,
-            status: post?.status || 'active'
+            _id: post?._id || '' ,
+            isActive: post?.isActive || true
         }
     })
 
@@ -29,39 +36,55 @@ function PostForm({post}) {
 
     const submit = async (data)=>{
         if(post){
-            const file = await data.image[0] ? databaseService.uploadFile(data.image[0]) : null 
+            // const file = await data.image[0] ? databaseService.uploadFile(data.image[0]) : null 
 
-            if(file){
-                databaseService.deleteFile(post.featuredImage)
-            }
+            // if(file){
+            //     databaseService.deleteFile(post.featuredImage)
+            // }
 
-            const dbPost = await databaseService.updatePost( post.$id , {
-                ...data ,
-                featuredImage : file ? file.$id : undefined 
-            })
+            // const dbPost = await databaseService.updatePost( post.$id , {
+            //     ...data ,
+            //     featuredImage : file ? file.$id : undefined 
+            // })
 
-            if(dbPost){
-                navigate(`/post/${dbPost.$id}`)
+            // if(dbPost){
+            //     navigate(`/post/${dbPost.$id}`)
+            // }
+            
+            const updatedBlog = await updateBlog({_id:post._id , title:data.title , content:data.content , image:data.image[0] });
+            
+            if(updatedBlog){
+                navigate(`/post/${updatedBlog.data._id}`)
             }
         }
         else{
             
-            const file =  data.image[0] ? await databaseService.uploadFile(data.image[0]) : null ;
+            // const file =  data.image[0] ? await databaseService.uploadFile(data.image[0]) : null ;
             
-            if(file){
+            // if(file){
                 
-                data.featuredImage = file.$id ;
+            //     data.featuredImage = file.$id ;
                 
-                console.log(data)
-                const dbPost = await databaseService.createPost({
-                    ...data,
-                    userId: userData.$id
-                })
-                if(dbPost){
-                    navigate(`/post/${dbPost.$id}`)
-                }
+            //     console.log(data)
+            //     const dbPost = await databaseService.createPost({
+            //         ...data,
+            //         userId: userData.$id
+            //     })
+            //     if(dbPost){
+            //         navigate(`/post/${dbPost.$id}`)
+            //     }
+            // }
+            const newData = {
+                title : data.title ,
+                image: data.image[0] ,
+                content : data.content ,
+                isActive : data.isActive 
             }
-            
+            const addBlog = await createBlog(newData) ;
+
+            if(addBlog){
+                navigate(`/post/${addBlog.data._id}`)
+            }
             
         }
     }
@@ -125,17 +148,17 @@ function PostForm({post}) {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={databaseService.getFilePreview(post.featuredImage)}
+                            src={post.image}
                             alt={post.title}
                             className="rounded-lg"
                         />
                     </div>
                 )}
                 <Select
-                    options = { ["active", "inactive"] }
+                    options = { ["true", "false"] }
                     label="Status"
                     className="mb-4"
-                    {...register("status", { required: true })}
+                    {...register("isActive", { required: true })}
                 />
                 <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
                     {post ? "Update" : "Submit"}

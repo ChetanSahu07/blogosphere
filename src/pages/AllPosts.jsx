@@ -5,14 +5,18 @@ import { data } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 
+
+import { getAllBlogs } from '../backendConnect/blog.js'
+
+
 function AllPosts() {
 
     const [posts , setPosts ] = useState([])
     const authStatus = useSelector((state)=>state.authReducer.status)
     useEffect( ()=>{
-        databaseService.getPosts().then((posts)=>{
+        getAllBlogs().then((posts)=>{
             if(posts){
-                setPosts(posts.documents)
+                setPosts(posts.data)
             }
         })
     },[])
@@ -40,8 +44,8 @@ function AllPosts() {
                 <div className='flex flex-wrap'>
                     {
                         posts.map((eachPost)=>(
-                            <div key={eachPost.$id} className='p-2 w-1/4'>
-                                <PostCard $id = {eachPost.$id} title = {eachPost.title} featuredImage={eachPost.featuredImage} />
+                            <div key={eachPost._id} className='p-2 w-1/4'>
+                                <PostCard _id= {eachPost._id} title = {eachPost.title} image={eachPost.image} />
                             </div>
                         ))
                     }

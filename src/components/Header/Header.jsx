@@ -16,7 +16,7 @@ export default function Header() {
     const [userData , seruserData ] = useState(userD) 
 
     useEffect(()=>{
-        console.log(userD)
+        //console.log(userD)
         seruserData(userD)
     },[userD])
 

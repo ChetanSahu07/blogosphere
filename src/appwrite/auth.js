@@ -1,5 +1,6 @@
 import { Client , Account , ID } from 'appwrite';
 import config from '../config/config';
+import axios from 'axios';
 
 export class AuthService {
 
@@ -35,6 +36,8 @@ export class AuthService {
     // creating login function 
 
     async login({email, password}){
+
+
         try{
             return await this.account.createEmailPasswordSession( email  , password ) ;
         }catch(error){
@@ -45,11 +48,22 @@ export class AuthService {
     // creating funtion for checking that currently logged in or not 
 
     async getCurrentUser(){
-        try{
-            return await this.account.get() ;
-        }catch(error){
-            console.log( "getcurrentuser error" , error );
-        } 
+
+        try {
+            const userData = await axios.get("api/v1/users/get-current-user",
+                {withCredentials:true}
+            );
+            console.log(userData);
+            
+        } catch (error) {
+            
+        }
+        
+        // try{
+        //     return await this.account.get() ;
+        // }catch(error){
+        //     console.log( "getcurrentuser error" , error );
+        // } 
 
         // if nothing will happen then we will return null 
         return null ;

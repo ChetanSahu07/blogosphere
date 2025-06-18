@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useDispatch } from "react-redux"
-import authservice from './appwrite/auth'
+//import authservice from './appwrite/auth'
 import { login, logout } from './store/authSlice'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import { Outlet } from 'react-router-dom'
+import axios from 'axios'
+
+
+
+
+
+import {userLogout, userLogin, userGetCurrentUser} from './backendConnect/auth.js'
 
 
 
@@ -18,13 +25,20 @@ function App() {
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch()
 
+
   // Now we will use useEffect so that we will ask that wheather we are logged in or not whenever page is loaded 
 
   useEffect(() => {
+    
     // We are fetching the current logged user and after thet inside .then() we will get current user's data 
+<<<<<<< HEAD
       getCurrentUser()
+=======
+      userGetCurrentUser()
+>>>>>>> 0a68494 (final commit)
       .then((userData) => {
         // If user is logged in then else 
+        
         if (userData) {
           dispatch(login({ userData }))
         }

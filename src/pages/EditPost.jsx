@@ -3,6 +3,10 @@ import { PostForm } from '../components'
 import { useNavigate, useParams } from 'react-router-dom'
 import databaseService from '../appwrite/dataservice'
 
+
+
+import { getBlog } from '../backendConnect/blog.js'
+
 function EditPost() {
 
     const [post , setPost ] = useState(null)
@@ -12,7 +16,7 @@ function EditPost() {
     useEffect(()=>{
 
         if(slug){
-            databaseService.getPost(slug).then((post)=>{
+            getBlog({_id:slug}).then((post)=>{
                 if(post){
                     setPost(post)
                 }
