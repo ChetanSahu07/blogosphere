@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 
 import { getBlog, deleteBlog } from "../backendConnect/blog.js";
 
+
+
 export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
@@ -27,7 +29,6 @@ export default function Post() {
     }, [slug, navigate]);
 
     const isAuthor = post && userData ? post.owner === userData.data._id : false;
-    
 
     const deletePost = () => {
         deleteBlog(post._id).then((status) => {

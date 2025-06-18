@@ -9,12 +9,6 @@ import axios from 'axios'
 
 
 
-// The change i had done
-
-import {userLogout, userLogin, userGetCurrentUser} from './backendConnect/auth.js'
-
-
-
 
 import { getCurrentUser } from './backendConnect/user.js'
 
@@ -31,7 +25,7 @@ function App() {
   useEffect(() => {
     
     // We are fetching the current logged user and after thet inside .then() we will get current user's data 
-      userGetCurrentUser()
+      getCurrentUser()
       .then((userData) => {
         // If user is logged in then else 
         

@@ -2,17 +2,25 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import authservice from '../../appwrite/auth'
 import { logout } from '../../store/authSlice'
+import { useNavigate } from 'react-router-dom'
 
-import { userLogout } from '../../backendConnect/auth.js'
+
+
+import { logoutUser } from '../../backendConnect/user'
+
 
 function LogoutBtn() {
+
+  const navigate = useNavigate() ;
     const dispatch = useDispatch()
 
     const logoutHandler = ()=>{
-        userLogout()
+        logoutUser()
         .then(()=>{
             dispatch(logout())
+            navigate("/")
         })
+
     }
     // After any function of authservice , we will use .then()
 

@@ -8,9 +8,12 @@ import { useForm } from 'react-hook-form'
 import Button from './button'
 
 
-import Logo from '../logo.png'
+import Logo from '../components/Logo/Logo.jsx'
 // The main thing that we are using is useForm from react hook form 
 
+
+
+import { getCurrentUser, loginUser } from '../backendConnect/user'
 
 function Login() {
     
@@ -32,10 +35,10 @@ function Login() {
         try {
             // Always remember that The login function always returns a session
             //console.log(data)
-            const session = await userLogin(data)
+            const session = await loginUser(data)
             if (session) {
                 // Now the userData always come from getcurrentUser()
-                const userData = await authservice.getCurrentUser()
+                const userData = await getCurrentUser()
                 
                 if (userData) {
                    
@@ -50,7 +53,7 @@ function Login() {
     }
 
     return (
-        <div className='flex items-center justify-center w-full' >
+        <div className='flex items-center justify-center my-8' >
             <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`} >
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">

@@ -9,9 +9,9 @@ import Logo from './Logo/Logo'
 import { login } from '../store/authSlice'
 
 
+import { getCurrentUser, registerUser } from '../backendConnect/user'
 
 
-import { userCreateAccount, userGetCurrentUser } from '../backendConnect/auth.js'
 
 function SignUp() {
     const [error, SetError] = useState("")
@@ -22,9 +22,9 @@ function SignUp() {
     const signupAccount = async (data) => {
         SetError("")
         try {
-            const session = await userCreateAccount(data) ;
+            const session = await registerUser(data) ;
             if (session) {
-                const userData = await userGetCurrentUser() ;
+                const userData = await getCurrentUser() ;
                 if (userData) {
                     dispatch(login(userData))
                     navigate("/")

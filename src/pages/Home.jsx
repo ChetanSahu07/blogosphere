@@ -10,9 +10,6 @@ import { getAllBlogs } from '../backendConnect/blog.js'
 
 // Is user is not logged in then we will get zero posts from database 
 
-
-import { getAllBlogs } from '../backendConnect/blog'
-
 function Home() {
     
     const [posts, setPosts] = useState([])
@@ -32,8 +29,8 @@ function Home() {
                 <Container>
                     <div className="flex flex-wrap">
                         <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                Login to read posts
+                            <h1 className="text-2xl font-bold text-gray-500">
+                                Please login to read blogs
                             </h1>
                         </div>
                     </div>

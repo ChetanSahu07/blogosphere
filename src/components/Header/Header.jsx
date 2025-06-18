@@ -54,7 +54,7 @@ export default function Header() {
             active: authStatus
         },
         {
-            name: authStatus && userData != null ? `User: ${userData.name}` : "userData is null",
+            name: authStatus && userData != null ? `User: ${userData.data.name}` : "userData is null",
             url: "/",
             active: authStatus
         }
