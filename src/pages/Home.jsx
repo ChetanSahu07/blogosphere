@@ -6,14 +6,17 @@ import { useSelector } from 'react-redux'
 
 // Is user is not logged in then we will get zero posts from database 
 
+
+import { getAllBlogs } from '../backendConnect/blog'
+
 function Home() {
     
     const [posts, setPosts] = useState([])
     const authStatus = useSelector((state)=>state.authReducer.status)
     useEffect(() => {
-        databaseService.getPosts().then((posts) => {
+        getAllBlogs().then((posts) => {
             if (posts) {
-                setPosts(posts.documents)
+                setPosts(posts.data)
             }
         })
     }, [])
@@ -40,7 +43,7 @@ function Home() {
                 <div className='flex flex-wrap'>
                     {
                         posts.map((eachPost)=>(
-                            <div className='w-1/4 p-2' key={eachPost.$id} >
+                            <div className='w-1/4 p-2' key={eachPost._id} >
                                 <PostCard {...eachPost} />
                             </div>
                         ))
