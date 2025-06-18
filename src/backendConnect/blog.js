@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const base_url = import.meta.env.BACKEND_BASE_URL ; 
+const base_url = import.meta.env.VITE_BACKEND_BASE_URL ; 
 
 const getAllBlogs = async () => {
     try {
