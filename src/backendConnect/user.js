@@ -1,10 +1,13 @@
 import axios from "axios"
 
+const base_url = import.meta.env.BACKEND_BASE_URL ; 
+
+
 const loginUser = async ({email, password})=>{
 
     try {
         const response = await axios.post(
-            "/api/v1/users/login",
+            `${base_url}/api/v1/users/login`,
             { email, password },
             {withCredentials:true}
         )
@@ -20,7 +23,7 @@ const registerUser = async ({name , email , password})=>{
 
     try {
         const response = await axios.post(
-            "/api/v1/users/register",
+            `${base_url}/api/v1/users/register`,
             {name,email,password},
             {withCredentials:true}
         )
@@ -34,7 +37,7 @@ const registerUser = async ({name , email , password})=>{
 const getCurrentUser = async()=>{
     try {
         const response = await axios.get(
-            "/api/v1/users/get-current-user",
+            `${base_url}/api/v1/users/get-current-user`,
             {withCredentials:true}
         )
         return response.data ;
@@ -48,7 +51,7 @@ const getCurrentUser = async()=>{
 const logoutUser = async()=>{
     try {
         const response = await axios.post(
-            "/api/v1/users/logout",
+            `${base_url}/api/v1/users/logout`,
             {},
             {withCredentials:true}
         )

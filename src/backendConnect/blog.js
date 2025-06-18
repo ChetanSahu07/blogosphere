@@ -1,9 +1,10 @@
 import axios from "axios"
 
+const base_url = import.meta.env.BACKEND_BASE_URL ; 
 
 const getAllBlogs = async () => {
     try {
-        const response = await axios.get("/api/v1/blogs/", { withCredentials: true });
+        const response = await axios.get(`${base_url}/api/v1/blogs/`, { withCredentials: true });
 
         return response.data;
     } catch (error) {
@@ -14,7 +15,7 @@ const getAllBlogs = async () => {
 
 const getBlogImage = async ({_id}) => {
     try {
-        const response = await axios.post("/api/v1/blogs/get-blog-image",
+        const response = await axios.post(`${base_url}/api/v1/blogs/get-blog-image`,
              {_id} ,
             { withCredentials: true }
         )
@@ -30,7 +31,7 @@ const getBlogImage = async ({_id}) => {
 const getBlog = async ({_id})=>{
     
     try {
-        const response = await axios.get(`/api/v1/blogs/b/${_id}` , {withCredentials:true}) ; 
+        const response = await axios.get(`${base_url}/api/v1/blogs/b/${_id}` , {withCredentials:true}) ; 
         return response.data.data ; 
     } catch (error) {
         console.log(`Error in fetching the single blog ${error?.message}`);
@@ -47,7 +48,7 @@ const updateBlog = async({title,content,_id,image})=>{
         formData.append("_id" , _id )
         formData.append("image", image)
         const response = await axios.patch(
-            "/api/v1/blogs/update-blog",
+            `${base_url}/api/v1/blogs/update-blog`,
             formData,
             {withCredentials:true}
         )
@@ -71,7 +72,7 @@ const createBlog = async({title , image , content , isActive })=>{
         formData.append("image", image)
 
         const response = await axios.post(
-            "/api/v1/blogs/upload-blog",
+            `${base_url}/api/v1/blogs/upload-blog`,
             formData,
             {withCredentials:true}
         )
@@ -89,7 +90,7 @@ const deleteBlog = async({_id})=>{
 
     try {
         const response = await axios.delete(
-            `/api/v1/blogs/delete-blog/${_id}`,
+            `${base_url}/api/v1/blogs/delete-blog/${_id}`,
             {withCredentials:true}
         )
         console.log(response.data);
